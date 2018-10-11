@@ -1,10 +1,11 @@
 <div class="container">
+        <form [formGroup]="formValidation">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="form-group mt-3">
-                <input #textbox type="text" class="form-control" placeholder="Task name" [(ngModel)]="task.title" />
-                <div class="invalid-feedback">
-                    {{validationError}}
+                <input #textbox type="text" class="form-control" placeholder="Task name" formControlName="title" [(ngModel)]="task.title" maxlength="1000" />
+                <div *ngIf="title.errors && title.errors.required">
+                        <label class="text-danger">Task name is required.</label>
                 </div>
             </div>
             <div class="form-group">
@@ -13,9 +14,10 @@
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-secondary" (click)="cancelTask()">Cancel</button>
-                <button type="button" class="btn btn-success float-right ml-2" (click)="saveTask()">Save</button>
+                <button type="button" class="btn btn-success float-right ml-2" (click)="saveTask()" [disabled]="formValidation.invalid">Save</button>
                 <button type="button" class="btn btn-danger float-right ml-2" (click)="deletedTask()">Delete</button>
             </div>
         </div>
     </div>
+</form>
 </div>
