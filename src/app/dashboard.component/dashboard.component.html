@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group text-right mt-3">
+                <button type="button" class="btn btn-success" (click)="addTask()">Add</button>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="filter"  placeholder="Type a task name...">
+            </div>
+            <div class="list-group">
+                <div class="list-group-item list-group-item-action flex-column mt-2" *ngFor="let task of (taskList | taskSearch:filter)"
+                    (click)="editTask(task, $event)">
+                    <div class="media">
+                        <div class="media-body">
+                            <h5 class="mt-1">
+                                {{task.title}}
+                            </h5>
+                            <div [style.color] = "getTaskDateColor(task)" >
+                                {{task.date | date: 'd MMM y' }}
+                            </div>
+                        </div>
+                        <div class="media-right">
+                            <button type="button" class="btn btn-success" (click)="compliteTask(task, $event)">Complete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
